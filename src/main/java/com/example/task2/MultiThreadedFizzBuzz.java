@@ -67,7 +67,8 @@ public class MultiThreadedFizzBuzz implements Runnable {
         linkedList.forEach(elem -> System.out.print(elem + " "));
     }
 
-    public synchronized void start() throws InterruptedException {
+
+    public void start() throws InterruptedException {
         Thread threadA = new Thread(() -> {
             try {
                 fizz();
