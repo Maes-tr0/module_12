@@ -95,17 +95,17 @@ public class MultiThreadedFizzBuzz implements Runnable {
         while (true) {
             synchronized (MONITOR_LOCKER) {
                 while (current.get() <= n && (current.get() % 3 == 0 || current.get() % 5 == 0)) {
+                    while (!queue.isEmpty()) {
+                        System.out.print(queue.take() + " ");
+                    }
                     MONITOR_LOCKER.wait();
                 }
+
                 if (current.get() > n) break;
-                queue.put(String.valueOf(current.get()));
+                System.out.print(current.get() + " ");
                 current.incrementAndGet();
                 MONITOR_LOCKER.notifyAll();
             }
-        }
-
-        while (!queue.isEmpty()) {
-            System.out.print(queue.take() + " ");
         }
     }
 }
